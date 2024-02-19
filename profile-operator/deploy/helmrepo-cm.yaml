@@ -1,0 +1,13 @@
+kind: ConfigMap
+metadata: # kpt-merge: example/helmrepo-cr-values
+  name: helmrepo-cr-values
+  namespace: profile-operator
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|example|helmrepo-cr-values'
+apiVersion: v1
+data:
+  values.yaml: |
+    replicaCount: 1  # kpt-set: ${replicas}
+    image:
+      tag: latest
+    url: 

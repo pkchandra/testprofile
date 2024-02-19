@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata: # kpt-merge: default/helmrepo-cr-ms
+  name: helmrepo-cr
+  namespace: 
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'helm.toolkit.fluxcd.io|HelmRelease|default|helmrepo-cr'
+spec:
+  chart:
+    spec:
+      chart: ./profile-operator/helmcharts/helmrepo-1.0.4.tgz  # kpt-set: ./${targetNamespace}/helmcharts/
+      version: '1.0.0'
+      sourceRef:
+        kind: GitRepository
+        name: nc-app # kpt-set: ${gitreponame}
+        namespace: default
+      reconcileStrategy: Revision
+      interval: 1m
+  targetNamespace: profile-operator
+  valuesFrom:
+  - kind: ConfigMap
+    name: helmrepo-cr-values
+    valuesKey: values.yaml

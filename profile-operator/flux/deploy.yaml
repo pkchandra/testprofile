@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata: # kpt-merge: default/app-deploy
+  name: profile-operator-deploy
+  namespace: profile-operator
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'kustomize.toolkit.fluxcd.io|Kustomization|default|profile-operator-deploy'
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: nc-app
+  path: "./profile-operator/deploy/"
+  interval: 60m
+  timeout: 5m
+  prune: true
+  wait: true
