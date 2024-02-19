@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   interval: 15m
-  path: ./helloworld/flux
+  path: ./profile-operator/flux
   prune: true
   sourceRef:
     kind: GitRepository
